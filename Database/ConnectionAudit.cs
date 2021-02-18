@@ -16,9 +16,10 @@ namespace Database
         public void insertAudit(Audit audit)
         {
 
-            _con = new SqlConnection("data source=.; database=student; integrated security=SSPI");
+            _con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;database=Moving;Integrated Security=True");
             _con.Open();
-            _cmd = new SqlCommand("insert into audit values(" + audit.Identification + ",'" + audit.Date + "')", _con);
+            string insertQuery = "USE [Moving] INSERT INTO [dbo].[Audit] VALUES(" + audit.Identification + ",'" + audit.Date.ToLocalTime() + "')";
+            _cmd = new SqlCommand(insertQuery, _con);
             try
             {
                 _cmd.ExecuteNonQuery();
