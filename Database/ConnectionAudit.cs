@@ -1,9 +1,6 @@
-﻿using Domain.Entity;
+﻿using Domain.Order;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace Database
 {
@@ -13,12 +10,12 @@ namespace Database
         SqlConnection _con = null;
 
 
-        public void insertAudit(Audit audit)
+        public void insertAudit(RawInfo rawinfo)
         {
 
             _con = new SqlConnection("Data Source=(localdb)\\ProjectsV13;database=Moving;Integrated Security=True");
             _con.Open();
-            string insertQuery = "USE [Moving] INSERT INTO [dbo].[Audit] VALUES(" + audit.Identification + ",'" + audit.Date.ToLocalTime() + "')";
+            string insertQuery = "USE [Moving] INSERT INTO [dbo].[Audit] VALUES(" + rawinfo.Identification + ",'" + rawinfo.Date.ToLocalTime() + "')";
             _cmd = new SqlCommand(insertQuery, _con);
             try
             {

@@ -1,5 +1,4 @@
 ﻿using Database;
-using Domain.Entity;
 using Domain.Order;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,10 +14,9 @@ namespace API.Controllers
         public IEnumerable<Output> post(RawInfo rawInfo)
         {
             ConnectionAudit connection = new ConnectionAudit();
-            Audit audit = new Audit();
-            audit.Date = DateTime.Now;
-            audit.Identification = 12345;
-            connection.insertAudit(audit);
+
+            rawInfo.Date = DateTime.Now;
+            connection.insertAudit(rawInfo);
 
             CalculateTravels calculateTravels = new CalculateTravels();
 
